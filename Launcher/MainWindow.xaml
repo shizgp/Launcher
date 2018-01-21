@@ -3,10 +3,339 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Launcher"
+        xmlns:model="clr-namespace:Client.Model"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="PurplePop GameLauncher" Height="800" Width="810"
+        WindowStartupLocation="Manual"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Background="{x:Null}">
+
+    <Window.Resources>
+        <model:GameIconList x:Key="GameIconKey" />
+    </Window.Resources>
+
+    <Grid Height="800" Width="810" Margin="0,0,0,0">
+        <StackPanel CanHorizontallyScroll="False">
+            <Border Name="Contents" Height="480" Width="810" Background="DarkGray" Visibility="Visible">
+                <ListBox x:Name="GameList" ItemsSource="{Binding Source={StaticResource GameIconKey}}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" FlowDirection="LeftToRight" Width="810" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Width="80" Height="60" Margin="0, 5, 5, 5" Cursor="Hand" CanHorizontallyScroll="False">
+                                <Image Source="{Binding IconSource}" Width="40" Height="40" />
+                                <TextBlock Text="{Binding GameName}" Width="80" TextAlignment="Center" />
+                            </StackPanel>
+
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+            <StackPanel HorizontalAlignment="Left" FlowDirection="LeftToRight" Height="300" Orientation="Horizontal">
+                <WrapPanel x:Name="GameTypePanel" HorizontalAlignment="Left" Margin="0,0,0,0" Height="310" VerticalAlignment="Top" Width="510">
+                    <TextBox x:Name="GameSearchString" Height="30" Width="500" Margin="0,10,0,10" TextChanged="TextBox_TextChanged" />
+                    <Image x:Name="InternetBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand" MouseLeftButtonDown="InternetBtn_Click">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/internet_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/internet_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="PopGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand" MouseLeftButtonDown="PopGameMouseDown">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/popular_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/popular_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="OnlineGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/online_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/online_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="MobileGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/mobile_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/mobile_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="WebGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/webGame_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/webGame_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="FpsGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/fps_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/fps_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="SportsGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/sports_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/sports_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="CasualGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/casual_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/casual_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="BoardGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/board_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/board_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="CdGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/cd_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/cd_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </WrapPanel>
+                <WrapPanel x:Name="UtilPanel" HorizontalAlignment="Left" Height="247.579" Margin="0,50,0,0" VerticalAlignment="Top" Width="239.871">
+                    <Image x:Name="MessengerDocBtn" Margin="0,0,5,5" Stretch="None" Width="73" Height="79" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/documentMessenger_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/documentMessenger_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="TvMovieBtn" Margin="0,0,5,5" Stretch="None" Width="73" Height="79" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/tvMovie_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/tvMovie_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="GameTvBtn" Margin="0,0,5,5" Stretch="None" Width="73" Height="79" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/pnntv_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/pnntv_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="TalkOnBtn" Margin="0,0,5,5" Stretch="None" Width="73" Height="79" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/talkOn_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/talkOn_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="NctalkOnBtn" Margin="0,0,5,5" Stretch="None" Width="73" Height="79" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/ncTalk_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/ncTalk_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="NewBtn" Margin="0,0,5,5" Stretch="None" Width="73" Height="79" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/news_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/news_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="WLauncherBtn" Margin="0,0,5,5" Stretch="None" Width="73" Height="79" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/wLauncher_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/wLauncher_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="FastPingBtn" Margin="0,0,5,5" Stretch="None" Width="73" Height="79" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/fastping_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/fastping_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="WebtoonBtn" Margin="0,0,5,5" Stretch="None" Width="73" Height="79" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/webtoon_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/webtoon_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </WrapPanel>
+                <!-- 내 컴퓨터, 모니터, 키보드, 마우스 제어 버튼 시작 -->
+                <!--
+                <StackPanel x:Name="ControlPanel" HorizontalAlignment="Left" Width="55.274">
+                    <Image x:Name="MyComputerBtn" Margin="0,0,5,5" Stretch="Fill" Width="40" Height="60" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/myComputer_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/myComputer_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="MonitorBtn" Margin="0,0,5,5" Stretch="Fill" Height="54.4" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/monitor_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/monitor_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="KeyboardBtn" Margin="0,0,5,5" Stretch="Fill" Height="54.4" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/keyboard_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/keyboard_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="MouseBtn" Margin="0,0,5,5" Stretch="Fill" Height="54.4" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/mouse_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/mouse_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="ControlPanelBtn" Margin="0,0,5,5" Stretch="Fill" Height="54.4" Cursor="Hand">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="Resources/control_normal.png" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Source" Value="Resources/control_hover.png"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </StackPanel>
+                -->
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
