@@ -1,4 +1,4 @@
-﻿<Window x:Class="Launcher.MainWindow"
+﻿<Window x:Name="LauncherMain" x:Class="Launcher.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,7 +10,7 @@
         ResizeMode="NoResize"
         AllowsTransparency="True"
         WindowStyle="None"
-        Background="{x:Null}">
+        Background="{x:Null}" Activated="LauncherMain_Activated">
 
     <Window.Resources>
         <model:GameIconList x:Key="GameIconKey" />
@@ -19,7 +19,7 @@
     <Grid Height="800" Width="810" Margin="0,0,0,0">
         <StackPanel CanHorizontallyScroll="False">
             <Border Name="Contents" Height="480" Width="810" Background="DarkGray" Visibility="Visible">
-                <ListBox x:Name="GameList" ItemsSource="{Binding Source={StaticResource GameIconKey}}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                <ListBox x:Name="GameList" ItemsSource="{Binding Source={StaticResource GameIconKey}}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="GameList_SelectionChanged">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal" FlowDirection="LeftToRight" Width="810" />
@@ -28,8 +28,8 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Width="80" Height="60" Margin="0, 5, 5, 5" Cursor="Hand" CanHorizontallyScroll="False">
-                                <Image Source="{Binding IconSource}" Width="40" Height="40" />
-                                <TextBlock Text="{Binding GameName}" Width="80" TextAlignment="Center" />
+                                <Image Source="{Binding IconImage}" Width="40" Height="40" />
+                                <TextBlock Text="{Binding Name}" Width="80" TextAlignment="Center" />
                             </StackPanel>
 
                         </DataTemplate>
@@ -63,7 +63,7 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Image x:Name="OnlineGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                    <Image x:Name="OnlineGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand" MouseDown="OnlineGameBtn_MouseDown">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="Source" Value="Resources/online_normal.png" />
@@ -75,7 +75,7 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Image x:Name="MobileGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                    <Image x:Name="MobileGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand" MouseDown="MobileGameBtn_MouseDown">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="Source" Value="Resources/mobile_normal.png" />
@@ -87,7 +87,7 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Image x:Name="WebGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                    <Image x:Name="WebGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand" MouseDown="WebGameBtn_MouseDown">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="Source" Value="Resources/webGame_normal.png" />
@@ -99,7 +99,7 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Image x:Name="FpsGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                    <Image x:Name="FpsGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand" MouseDown="FpsGameBtn_MouseDown">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="Source" Value="Resources/fps_normal.png" />
@@ -111,7 +111,7 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Image x:Name="SportsGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                    <Image x:Name="SportsGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand" MouseDown="SportsGameBtn_MouseDown">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="Source" Value="Resources/sports_normal.png" />
@@ -123,7 +123,7 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Image x:Name="CasualGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                    <Image x:Name="CasualGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand" MouseDown="CasualGameBtn_MouseDown">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="Source" Value="Resources/casual_normal.png" />
@@ -135,7 +135,7 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Image x:Name="BoardGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                    <Image x:Name="BoardGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand" MouseDown="BoardGameBtn_MouseDown">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="Source" Value="Resources/board_normal.png" />
@@ -147,7 +147,7 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Image x:Name="CdGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand">
+                    <Image x:Name="CdGameBtn" Margin="0,0,5,5" Stretch="None" Width="96" Cursor="Hand" MouseDown="CdGameBtn_MouseDown">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="Source" Value="Resources/cd_normal.png" />

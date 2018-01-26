@@ -14,24 +14,20 @@ namespace Client.Model
 
     public class GameIcon
     {
-
-        private string gameName;
-        private string iconSource;
-
-        public GameIcon(string gameName) {
-            this.gameName = gameName;
-            
-            this.iconSource = "C:\\Users\\Sunny\\source\\repos\\Launcher\\Launcher\\Resources\\fps_hover.png";
+        public GameIcon(string name)
+        {
+            this.name = name;
         }
+
+        private string name;
+        private string path;
+        private string type;
+        private ImageSource iconImage;
+
+        public string Name { get => name; set => name = value; }
+        public string Path { get => path; set => path = value; }
+        public string Type { get => type; set => type = value; }
+        public ImageSource IconImage { get => iconImage; set => iconImage = value; }
         
-        public string GameName
-        {
-            get { return this.gameName; }
-        }
-
-        public string IconSource
-        {
-            get { return this.iconSource; }
-        }
     }
 }

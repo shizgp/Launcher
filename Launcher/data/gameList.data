@@ -1,0 +1,27 @@
+﻿[{
+	"type": "FPS",
+	"platform": "battleNet",
+	"name": "Overwatch",
+	"path": "C:/Program Files (x86)/Windows Media Player/wmplayer.exe"
+},
+{
+	"type": "FPS",
+	"name": "서든어택",
+	"path": "C:/Program Files (x86)/GRETECH/GomPlayer/GOM.exe"
+},
+{
+	"type": "FPS",
+	"name": "BattleField 1",
+	"path": "D:/OriginLibrary/Battlefield 1/bf1.exe"
+},
+{
+	"type": "FPS",
+	"name": "Gunpoint",
+	"path": "C:/Users/Sunny/Desktop/gunpoint.url"
+},
+{
+	"type": "FPS",
+	"name": "Natural Selection 2",
+	"path": "D:/SteamLibrary/steamapps/common/Natural Selection 2/NS2.exe"
+}
+]
